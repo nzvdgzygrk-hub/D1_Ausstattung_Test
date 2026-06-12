@@ -66,8 +66,14 @@ th{background:#eee}
 background:#dfe7ff !important;
 font-size:16px;
 font-weight:bold;
-border:none !important;
+border-top:2px solid #1e88e5 !important;
+border-left:2px solid #1e88e5 !important;
+border-right:2px solid #1e88e5 !important;
+border-bottom:0 !important;
 }
+.gstart{border-left:2px solid #1e88e5 !important;}
+.gend{border-right:2px solid #1e88e5 !important;}
+.gbottom{border-bottom:2px solid #1e88e5 !important;}
 
 select{width:100%}
 
@@ -111,14 +117,14 @@ margin-top:20px;
 </tr>
 
 <tr>
-<th>Oberteil</th>
-<th>Hose</th>
+<th class="gstart gbottom">Oberteil</th>
+<th class="gend gbottom">Hose</th>
 
-<th>Jacke</th>
-<th>T-Shirt</th>
-<th>Hose</th>
+<th class="gstart gbottom">Jacke</th>
+<th class="gbottom">T-Shirt</th>
+<th class="gend gbottom">Hose</th>
 
-<th>Winter</th>
+<th class="gstart gend gbottom">Winter</th>
 </tr>
 </thead>
 
