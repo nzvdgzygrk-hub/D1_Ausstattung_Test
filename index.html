@@ -220,7 +220,17 @@ return;
 
 data.forEach(d=>{
 let r=[...document.querySelectorAll("tr")].find(x=>x.dataset.name===d.spieler);
-if(!r) return;
+
+if(String(d.nummer||"")==="GELOESCHT"){
+  if(r) r.remove();
+  return;
+}
+
+if(!r){
+  document.getElementById("tb").insertAdjacentHTML("beforeend", row({n:d.spieler,nr:d.nummer||1}));
+  r=document.getElementById("tb").lastElementChild;
+  r.querySelectorAll("select:not(.nr)").forEach(s=>s.innerHTML=opt());
+}
 
 r.querySelector(".nr").value=d.nummer||"";
 r.querySelector(".o").value=d.trikotOberteil||"";
