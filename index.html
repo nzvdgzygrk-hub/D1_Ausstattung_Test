@@ -302,13 +302,27 @@ t+=`${s} (${data[s].length}x): ${data[s].join(", ")}\n`;
 return t+"\nGesamt: "+sum+" Stück";
 }
 
+function formatOhneNummern(title,data){
+const order=["164","S","M","L","XL"];
+let t=title+"\n\n";
+let sum=0;
+
+order.forEach(s=>{
+if(!data[s]) return;
+sum+=data[s].length;
+t+=`${s}: ${data[s].length}x\n`;
+});
+
+return t+"\nGesamt: "+sum+" Stück";
+}
+
 function copy(t){
 navigator.clipboard.writeText(t);
 alert("kopiert");
 }
 
 function exportTrikots(){
-copy("TRIKOT OBERTEIL\n\n"+format("Oberteil",gruppieren(".o"))+"\n\nTRIKOT HOSE\n\n"+format("Hose",gruppieren(".h")));
+copy("TRIKOT OBERTEIL\n\n"+format("Oberteil",gruppieren(".o"))+"\n\nTRIKOT HOSE\n\n"+formatOhneNummern("Hose",gruppieren(".h")));
 }
 
 function exportPraes(){
