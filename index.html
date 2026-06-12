@@ -1,10 +1,28 @@
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="de">
 <head>
-<title>D1 Test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D1 Ausstattung Test</title>
+<style>
+body{font-family:Arial;margin:10px;background:#f6f7f9}h1{text-align:center}.status{background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;text-align:center;margin-bottom:10px;font-weight:bold}.warn{display:none;background:#ffe1e1;border:1px solid #d00;color:#900;border-radius:8px;padding:10px;text-align:center;margin-bottom:10px;font-weight:bold}button{width:80%;max-width:500px;display:block;margin:8px auto;padding:12px;background:#222;color:#fff;border:0;border-radius:8px}table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid #ddd;padding:6px;text-align:center}th{background:#eee}select{width:100%}.nr.dup{background:#ffb3b3;border:2px solid #d00}.footer{text-align:center;color:#777;font-size:12px;margin-top:20px}
+</style>
 </head>
 <body>
-<h1>D1 Ausstattung Test</h1>
+<h1>Bestelluebersicht Test</h1>
+<div id="status" class="status">Test bereit</div>
+<div id="warn" class="warn">Doppelte Rueckennummer vorhanden.</div>
+<button onclick="saveTest()">Speichern testen</button>
+<table><thead><tr><th>Spieler</th><th>Nr</th><th>Oberteil</th></tr></thead><tbody id="tb"></tbody></table>
+<div class="footer">Programmiert von F. Kaplan</div>
+<script>
+const players=[['Paul B',1],['Benjamin',2],['Noel',3],['Mika',4],['Mario K.',5],['Jonas K.',6],['Julian H.',7],['Malik V.',9],['Paul H.',10],['Semih D.',11],['Elias',12],['Aos A.',13],['Piotr K.',14],['Efe K.',16],['Kirill B.',19],['Jannik H.',22],['David W.',30],['Ahmet S.',61]];
+function nums(n){let s='';for(let i=1;i<=99;i++)s+=`<option ${i==n?'selected':''}>${i}</option>`;return s}
+function sizes(){return '<option></option><option>S</option><option>M</option><option>L</option><option>XL</option><option>164</option>'}
+function build(){document.getElementById('tb').innerHTML=players.map(p=>`<tr><td>${p[0]}</td><td><select class="nr" onchange="checkNumbers()">${nums(p[1])}</select></td><td><select>${sizes()}</select></td></tr>`).join('');checkNumbers()}
+function checkNumbers(){const map={};let dup=false;document.querySelectorAll('.nr').forEach(s=>{s.classList.remove('dup');(map[s.value]??=[]).push(s)});Object.values(map).forEach(list=>{if(list.length>1){dup=true;list.forEach(s=>s.classList.add('dup'))}});document.getElementById('warn').style.display=dup?'block':'none';return !dup}
+function saveTest(){if(!checkNumbers()){document.getElementById('status').innerText='Speichern blockiert';alert('Doppelte Rueckennummer vorhanden.');return}document.getElementById('status').innerText='Keine Doppelnummer. Test OK'}
+build();
+</script>
 </body>
 </html>
